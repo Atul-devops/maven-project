@@ -12,13 +12,24 @@ steps
            }
 	stage('compile source code')
 	{
-	steps
+steps
 	{
 	withMaven(jdk: 'local_java', maven: 'local_maven') 
-    {
+     {
 	sh 'mvn compile'
-    }
-         }
+	  }
+     }
 	   }
+  stage('test source code')
+	 {
+steps
+	    {
+	withMaven(jdk: 'local_java', maven: 'local_maven') 
+          {
+	sh 'mvn test'
+          }
+	
+          }
+	    }
     }
 }
