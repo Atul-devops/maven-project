@@ -7,8 +7,16 @@ agent any
      {
 steps
        {
-         git 'https://github.com/Atul-devops/maven-project.git'
-       }
-     }
+         git branch master 'https://github.com/Atul-devops/maven-project.git'
+		 }
+           }
+	stage('compile source code')
+	{
+	steps
+	{
+	withMaven(jdk: 'local_java', maven: 'local_maven') 
+    sh 'mvn compile'
+    }
+        }
     }
 }
