@@ -1,7 +1,3 @@
-
-
-
-
 pipeline
 {
 agent any
@@ -14,7 +10,7 @@ steps
          git 'https://github.com/Atul-devops/maven-project.git'
 		 }
            }
-stage('compile source code')
+	stage('compile source code')
 	{
 	steps
 	{
@@ -24,7 +20,7 @@ stage('compile source code')
 	  }
     }
 	   }
-stage('test source code')
+	stage('test source code')
 	 {
 	steps
 	    {
@@ -35,7 +31,7 @@ stage('test source code')
 	
           }
 	    }
-stage('create package-artifact')
+		stage('create package-artifact')
 	 {
 	steps
 	    {
@@ -46,5 +42,15 @@ stage('create package-artifact')
 	
           }
 	    }
+	stage('deploy on tomcat')
+	{
+	steps
+	{
+	sshagent(['deploytomcat']) 
+	{
+	sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.24.167:/var/lib/tomcat/webapps'
+}
     }
+ }
+   }
 }
