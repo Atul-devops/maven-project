@@ -15,8 +15,10 @@ steps
 	steps
 	{
 	withMaven(jdk: 'local_java', maven: 'local_maven') 
-    sh 'mvn compile'
+    {
+	sh 'mvn compile'
     }
-        }
+         }
+	   }
     }
 }
