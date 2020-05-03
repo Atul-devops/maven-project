@@ -7,7 +7,7 @@ agent any
      {
 steps
        {
-         git branch master 'https://github.com/Atul-devops/maven-project.git'
+         git 'https://github.com/Atul-devops/maven-project.git'
 		 }
            }
 	stage('compile source code')
