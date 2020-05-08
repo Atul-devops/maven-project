@@ -48,7 +48,7 @@ steps
 	{
 	sshagent(['deploytmcat']) 
 	{
-	sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@18.221.180.197:/opt/webapps/'
+	sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@18.221.180.197:/opt/webapps'
 }
     }
  }
