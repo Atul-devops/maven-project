@@ -36,7 +36,7 @@ steps
 	steps
 	    {
 		
-		withSonarQubeEnv('sonar')
+		withSonarQubeEnv('sonarmy')
 	{	
 		
 	withMaven(jdk: 'local_java', maven: 'local_maven') 
