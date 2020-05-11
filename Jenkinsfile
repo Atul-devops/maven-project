@@ -37,17 +37,16 @@ steps
 	    {
 		
 		withSonarQubeEnv('sonar')
-		}
-		
 	{	
 		
 	withMaven(jdk: 'local_java', maven: 'local_maven') 
-     }
+     
 	 
 	 {
 	sh 'mvn package'
 	}
 	}
-          
+	    }
+	    }
    }
 }
