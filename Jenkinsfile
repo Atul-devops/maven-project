@@ -43,7 +43,7 @@ steps
      
 	 
 	 {
-	sh 'mvn package'
+	sh 'mvn clean package sonar:sonar'
 	}
 	}
 	    }
