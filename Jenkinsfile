@@ -35,22 +35,19 @@ steps
 	 {
 	steps
 	    {
+		
+		withSonarQubeEnv('sonar')
+		}
+		
+	{	
+		
 	withMaven(jdk: 'local_java', maven: 'local_maven') 
-          {
+     }
+	 
+	 {
 	sh 'mvn package'
-          }
-	
-          }
-	    }
-	stage('deploy on tomcat')
-	{
-	steps
-	{
-	sshagent(['deploytmcat']) 
-	{
-	sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@18.221.180.197:/opt/webapps'
-}
-    }
- }
+	}
+	}
+          
    }
 }
