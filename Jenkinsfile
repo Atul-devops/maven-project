@@ -1,44 +1,57 @@
+
 pipeline
 {
- agent any
-   stages
-  {
-    stage ('Source code checkout')
+agent any
+ stages
+   {
+ stage('SCM checkout')
+     {
+steps
+       {
+         git 'https://github.com/Atul-devops/maven-project.git'
+		 }
+           }
+	stage('compile source code')
 	{
 	steps
 	{
-	  git 'https://github.com/Atul-devops/maven-project.git'
+	withMaven(jdk: 'local_java', maven: 'local_maven') 
+    {
+	sh 'mvn compile'
 	  }
+    }
 	   }
-	 stage('compile the code')
+	stage('test source code')
 	 {
-	   steps
-	   {
-	      withMaven(jdk: 'local_java', maven: 'local_maven') 
-		 { 
-		   sh 'mvn compile'
-		   }
-		  }
-		 }
-		stage('test the code')
-		{
-		  steps
-		  {
-		    withMaven(jdk: 'local_java', maven: 'local_maven') 
-			{
-			  sh 'mvn test'
-		    }
-			  }
-			   }
-		 stage('create package artifact')
-		 {
-		  steps
-		  {
-		    withMaven(jdk: 'local_java', maven: 'local_maven') 
-			{
-			  sh 'mvn package'
-			  }
-			 }
-			} 
-		}	
-	}
+	steps
+	    {
+	withMaven(jdk: 'local_java', maven: 'local_maven') 
+          {
+	sh 'mvn test'
+          }
+	
+          }
+	    }
+		stage('create package-artifact')
+	 {
+	steps
+	    {
+	withMaven(jdk: 'local_java', maven: 'local_maven') 
+          {
+	sh 'mvn package'
+          }
+	
+          }
+	    }
+	stage('deploy on tomcat')
+	{
+	steps
+	{
+	sshagent(['on-tomcat']) 
+	{
+	sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@3.21.228.229:/opt/apache-tomcat-9.0.35/webapps'
+}
+    }
+ }
+   }
+}
