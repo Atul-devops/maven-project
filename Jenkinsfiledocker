@@ -8,4 +8,7 @@ stage ('package stage')
 {
 sh label: '', script: 'mvn clean package'
    }
+stage ('docker image build') 
+{
+sh 'docker build -t atul0407/atul-app:0.1 .'
 }
