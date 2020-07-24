@@ -17,7 +17,7 @@ sh 'docker build -t atul0407/atul-app:0.1 .'
    
    
 	stage ('Push Docker image to DockerHub') {
-	  withCredentials([usernameColonPassword(credentialsId: 'dockerHubAccount', variable: 'dockerHubAccount')]) {
+	  withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', passwordVariable: 'atul@04071995', usernameVariable: 'atul0407')])  {
 	     sh "docker login -u atul0407 -p ${dockerHubAccount}"
 	     }
 	   sh 'docker push atul0407/atul-app:0.1'
