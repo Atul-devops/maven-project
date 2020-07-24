@@ -15,12 +15,11 @@ stage ('docker image build')
 sh 'docker build -t atul0407/atul-app:0.1 .'
    }
    
-   stage ('Push Docker image to DockerHub') 
-   {
-withCredentials([string(credentialsId: 'dockerHubAccount', variable: 'dockerHubAccount')]) 
-{
-sh "docker login -u atul0407 -p ${dockerHubAccount}"
-}
-sh 'docker push atul0407/atul-app:0.1'
+   
+	stage ('Push Docker image to DockerHub') {
+	  withCredentials([string(credentialsId: 'dockerHubAccount', variable: 'dockerHubAccount')]) {
+	     sh "docker login -u pkw0301 -p ${dockerHubAccount}"
+	     }
+	   sh 'docker push atul0407/atul-app:0.1'
    }
 }
