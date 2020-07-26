@@ -23,7 +23,7 @@ sh 'docker build -t atul0407/atul-app:0.1 .'
 	   sh 'docker push atul0407/atul-app:0.1'
    }
    
-   stage (Deploy to Dev) 
+   stage ('Deploy to Dev') 
    {
 def dockerRun = 'docker run -d -p 9000:8080 --name my-tomcat-app atul0407/atul-app:0.1'
 sshagent([deploy-to-dev-docker]) 
