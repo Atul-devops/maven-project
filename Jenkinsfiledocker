@@ -29,7 +29,7 @@ sh 'docker build -t atul0407/atul-app:0.1 .'
 def dockerRun = 'docker run -d -p 9000:8080 --name my-tomcat-app atul0407/atul-app:0.1'
 sshagent(['deploy-to-dev-docker']) 
 {
-sh "ssh -o StrictHostKeyChecking=no ec2-user@18.222.143.80 ${dockerRun}"
+sh "ssh -o StrictHostKeyChecking=no ec2-user@3.23.127.180 ${dockerRun}"
     }
  }
 }
