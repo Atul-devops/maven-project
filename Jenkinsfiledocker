@@ -12,7 +12,7 @@ sh label: '', script: 'mvn clean package'
    
 stage ('docker image build') 
 {
-sh 'docker build -t atul0407/atul-app:0.1 .'
+sh 'docker build -t atul0407/atul-app:0.2 .'
    }
    
    
@@ -21,12 +21,12 @@ sh 'docker build -t atul0407/atul-app:0.1 .'
 	 withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', passwordVariable: 'dockerHubAccount', usernameVariable: 'dockerHubAccount')])  {
 	     sh "docker login -u atul0407 -p ${dockerHubAccount}"
 	     }
-	   sh 'docker push atul0407/atul-app:0.1'
+	   sh 'docker push atul0407/atul-app:0.2'
    }
    
    stage ('Deploy to Dev') 
    {
-def dockerRun = 'docker run -d -p 9001:8080 --name my-tomcat-app atul0407/atul-app:0.1'
+def dockerRun = 'docker run -d -p 9001:8080 --name my-tomcat-app atul0407/atul-app:0.2'
 sshagent(['deploy-to-dev-docker']) 
 {
 sh "ssh -o StrictHostKeyChecking=no ec2-user@3.129.62.58 ${dockerRun}"
